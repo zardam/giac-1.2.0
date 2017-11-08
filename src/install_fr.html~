@@ -1,0 +1,631 @@
+<html>
+<HEAD>
+<META Name="author" Content="Bernard Parisse">
+<META Name="description" Content="installation xcas">
+<META Name="keywords" Content="installation xcas">
+<link rel="icon" type="image/png" href="http://www-fourier.ujf-grenoble.fr/~parisse/logo.png" />
+</HEAD>
+
+
+<title> Installation de Xcas </title>
+
+<body>
+Navigation:
+<A HREF="install_en.html">English version</A>, <A HREF="giac_fr.html">Retour a la page de Giac/Xcas</A>.
+
+<H1>Installation de Xcas</H1>
+<b>T&eacute;l&eacute;charger Xcas pour</b> :
+<UL>
+<LI><A HREF="#xcaswin">
+Windows </A>,
+<LI><A HREF="#osx">
+Mac OS X</A>,
+<LI><A HREF="#packages">
+Linux debian/ubuntu</A>,
+<LI><A HREF="#xcasrpm">
+Linux RPM</A>,
+<LI><A HREF="#xcasarch">
+archlinux</A>,
+<LI><A HREF="#xcaslinuxarm">
+Linux ARM</A>,
+<LI><A HREF="#xcaslinux">
+Linux binaires</A>,
+<LI><A HREF="http://www.math.jussieu.fr/~han/xcas">
+Free BSD</A>,
+<li><A HREF="#android">Android</A>,
+<li><A HREF="#ti">TI Nspire</A>,
+<LI><A HREF="#xcaswince">
+Windows CE</A>,
+</UL>
+Une fois Xcas install&eacute; sur PC ou Mac, vous pouvez choisir entre
+<tt>xcas</tt> (interface graphique) et <tt>giac</tt> 
+(interface texte).
+
+<!--
+Vous pouvez installer Xcas comme application lanc&eacute;e si Mozilla 
+Firefox rencontre un lien sur un fichier de session Xcas en ouvrant
+le menu Edition->Preferences puis Navigateur/Applications puis
+cliquez sur Nouveau type, indiquez 
+<tt>xws</tt> comme extension, cliquez sur Ouvrir avec 
+et choisissez xcas dans <tt>c:/xcas/</tt>
+(Windows) ou <tt>/usr/bin</tt> ou <tt>/usr/local/bin</tt> (Linux)
+ou <tt>/Applications</tt> (Mac).
+-->
+
+<H2> <A NAME=new> Quoi de neuf?</A> </H2>
+<UL>
+<li> version 1.1.4 (fevrier 2015):
+corrections de bugs, quelques am&eacute;liorations en alg&egrave;bre
+lin&eacute;aire num&eacute;rique (par ex. linsolve accepte
+maintenant le r&eacute;sultat de la d&eacute;composition
+LU en arguments pour r&eacute;soudre plus rapidement
+des syst&egrave;mes)
+</li>
+<li> version 1.1.3 (decembre 2014):
+nouvelles fonctions pour la gestion du son (soundsec, playsnd)
+et usage plus simple pour writewav. La fonction fft utilise
+GSL si elle est disponible et est donc plus rapide.
+</li>
+<li> version 1.1.2 (septembre 2014):
+Repr&eacute;sentation rationnelle univari&eacute;e, pour la
+r&eacute;solution efficace de syst&egrave;mes polynomiaux.
+Bases de Groebner modulaires beaucoup plus rapides 
+(dans les versions 1.1.0 r&eacute;centes).
+<br>
+Arithm&eacute;tique d'intervalles.
+</li>
+<li> version 1.1.2 (septembre 2014):
+stabilisation du code,
+</li>
+<li> version 1.1 (juillet 2013):
+simplifications et ameliorations en probabilit&eacute;s/statistiques
+(lois classiques, tests, chaines de Markov, voir par exemple
+<a href="agreg.html#optiona">ici</a> et les exemples
+du menu Aide->Exemples->Proba),
+m&eacute;thode d'int&eacute;gration num&eacute;rique adaptative,
+corrections de bugs
+<li> version 1.0 (novembre 2012):
+coloration syntaxique dans les lignes de commande.
+</li>
+<li> version 0.9.9: 
+assistant de cr&eacute;ation de fonction, test et boucles,
+repr&eacute;sentation de petits graphes probabilistes (matrices de taille<=7)
+avec la commande <tt>plotproba</tt>, 
+construction de corps finis non premiers plus facile (<tt>GF</tt>),
+optimisations pour l'algebre lineaire sur
+les entiers (determinant, inverse de matrice, par exemple
+<tt>det(hilbert(100))</tt> prend 0.56s sur un AMD 64 bits a 2.8GHz).
+</li>
+<li>version 0.9.8: crible quadratique (self-initialized multi-polynomial
+quadratic sieve) pour factoriser des entiers de 40 &agrave; 77 chiffres
+(vitesse comprise entre celle de PARI et celle de msieve/yafu).
+</li>
+<li>version 0.9.6. Fonction binomiale plus rapide.
+Documents de prise en main de Xcas pour le nouveau
+programme de proba de TS <a href="irem/terminale/probats.pdf">PDF</a>,
+et <a href="irem.html#terminale">sessions d'illustration</a>.
+</li>
+<li>version 0.9.5: support Lapack
+</li>
+<LI> version 0.9.4:
+Indexation des matrices en commencant a 1 en mode Xcas avec
+double-crochets, par exemple <tt>M[[1,2]]</tt>.
+On peut agrandir ou retrecir un &eacute;diteur de programmes
+avec F5/F6. La trousse de survie (fiches pour commencer) est
+maintenant install&eacute;e sur le PC/Mac (au lieu d'etre
+en-ligne).
+</LI>
+<LI> version 0.9.3:
+Simplification pour d&eacute;finir une fonction d&eacute;riv&eacute;e
+<tt> f(x):=x^2+3x+1; g:=f'; g(-3/2); g(1); solve(g(x)>0) </tt>
+Nouvelle fonction taux accroissement, utile pour les 1eres S
+<tt>taux_accroissement(f(x),a,a+h)</tt>
+</LI>
+<LI>
+version 0.9.0:
+<br>
+Nouveaux items pour le menu Aide->Internet: des fiches de prise en main
+Xcas, et une page pour les candidats au Capes.
+<br>
+La documentation est dor&eacute;navant traduite avec <tt>hevea</tt>
+au lieu de <tt>latex2html</tt> ce qui r&eacute;duit la taille
+des fichiers avec une qualit&eacute; comparable.
+<br>
+les routines de calcul de PGCD et de factorisation
+de polynomes ont &eacute;t&eacute;
+acc&eacute;l&eacute;r&eacute;es, ce qui se ressent par exemple
+dans des calculs de simplifications.
+<br>
+La version windows est compil&eacute;e avec la version 1.7 de <tt>cygwin</tt>
+et n'est plus compatible avec des versions de windows ant&eacute;rieures
+&agrave; XP.
+</LI>
+<LI>
+version 0.8.4:
+l'&eacute;diteur de programmes de Xcas propose la coloration
+syntaxique des commande de Xcas, l'indentation (touche Tab ou Esc/Echap,
+fonctionnalit&eacute; en test), ainsi qu'une nouvelle structure de
+boucle <tt>repeter ... jusqua ...; </tt>. Dans la version du 30/11,
+l'aide s'affiche dans une bulle lorsqu'on tape un mot clef reconnu
+suivi par une parenth&egrave;se ouvrante (sauf Mac OS).
+</LI>
+</UL>
+
+<H2> <A NAME=xcaswin> Xcas pour Windows</A> </H2> 
+Pour t&eacute;l&eacute;charger l'installeur 
+<UL>
+<LI> version stable
+(1.1.4, f&eacute;vrier 2015), suivez ce 
+<A HREF="giac/xcasinst.exe">lien</A>
+cliquez sur le fichier t&eacute;l&eacute;charg&eacute; et
+suivez les instructions. Ensuite cliquez
+sur <tt>xcasfr</tt>. 
+Il existe aussi une version exp&eacute;rimentale pour 
+<a href="giac/xcas64inst.exe">Windows 64 bits</a>.
+</LI>
+<LI> version en cours de tests, en suivant ce
+<A HREF="giac/xcasunst.exe">lien</A>
+</LI>
+<LI>
+ancienne version stable (1.1.2), suivez ce 
+<A HREF="giac/xcasold.exe">lien</A>
+cliquez sur le fichier t&eacute;l&eacute;charg&eacute; et
+suivez les instructions. Ensuite cliquez
+sur <tt>xcasfr</tt>. 
+</LI>
+</UL>
+Remarques:
+<UL>
+<li>
+Si l'erreur suivante apparait &agrave; l'installation<br>
+Erreur lors de l'ouverture du fichier en &eacute;criture: "c:\xcas\doc\local\html_mall".</br>
+effacez le fichier <tt>c:\xcas\doc\local</tt> et relancez l'installeur.
+</li>
+<LI>
+Xcas fonctionne en principe sur toutes les versions de Windows 98 a
+Windows 7. Si Xcas ne fonctionne pas sur votre Windows, 
+il est toujours possible de travailler avec un CD-live
+linux contenant Xcas, par exemple celui de 
+<a
+href="http://boisson.homeip.net/clef/ClefAgreg.html">l'agregation</A>
+ou 
+bas&eacute; sur
+<a
+href="http://www.lyc-valery-sete.ac-montpellier.fr/~phil/puppy">puppy</A>
+linux.
+</LI>
+<LI>
+Pour les utilisateurs de windows 98, installez la version 0.8.6
+(stable ancienne) et remplacez dans le r&eacute;pertoire
+d'installation stable de Xcas par les 
+fichiers de <A HREF="giac/xcas98.zip">cette archive</A>.
+</LI>
+<LI>
+Pour une installation en r&eacute;seau,
+installez sur le lecteur r&eacute;seau 
+(en g&eacute;n&eacute;ral <tt>J:</tt>) puis d&eacute;clarez 
+<tt>xcasfr.bat</tt> dans la base de donn&eacute;es de logiciels.
+Si le r&eacute;pertoire personnel est <tt>P:</tt> et le lecteur
+r&eacute;seau est <tt>J:</tt>, vous pouvez d&eacute;clarer
+<tt>xcasfrjp.bat</tt> ou sinon vous en inspirer.
+<br>
+Attention, si la lettre du lecteur n'est pas la meme
+sur le serveur que depuis un poste r&eacute;seau, il faut modifier
+les fichiers <tt>xcasfr.bat</tt> et <tt>runxcas.fr</tt> et y changer
+la lettre du lecteur, voir 
+<A HREF="http://xcas.e.ujf-grenoble.fr/XCAS/viewtopic.php?f=1&t=417">le forum de Xcas</A>. Il est recommend&eacute; de d&eacute;commenter dans le fichier
+<tt>runxcas.fr</tt> les lignes <br>
+<tt>export XCAS_HOME='/cygdrive/p'</tt><br>
+<tt>export XCAS_AUTOSAVEFOLDER='/cygdrive/p'</tt><br>
+en changeant la lettre <tt>p</tt> en la lettre du lecteur du r&eacute;pertoire
+personnel.
+</LI>
+<LI>
+Pour pouvoir pr&eacute;visualiser avant impression, vous devez aussi
+installer <A HREF="http://www.cs.wisc.edu/~ghost/"><tt>Ghostscript</tt>
+et <tt>GSview</tt></A>
+(attention, il faut installer les deux logiciels).
+</LI>
+<LI>
+Depuis la version 0.6.3 de Xcas pour Windows, 
+l'executable <tt>xcas.exe</tt> utilise une librairie dynamique
+<tt>giac.dll</tt>, permettant l'ajout de l'interface texte
+<tt>giac.exe</tt> et permettant aux d&eacute;veloppeurs cygwin
+d'utiliser du calcul symbolique dans leurs programmes C++.
+</LI>
+</UL>
+
+<H2><A NAME=osx>Xcas pour Mac OS X </A></H2>
+<UL>
+<LI>
+Pour <b>Mac OS X.6/../10</b>, la
+<A HREF="giac/xcas_osx6.dmg.gz">version stable</A> est
+disponible ainsi que la version <A HREF="giac/xcas_osx6_unstable.dmg.gz">instable</A>.
+<ul>
+<li> Pour installer sans avoir &agrave; mettre de mot de passe 
+(demand&eacute; par les OSX r&eacute;cents, par exemple par OSX.10),
+ouvrez un Terminal (dans Accessoires ou Autres), puis faites
+<br>
+<tt>cd /Applications
+<br>
+mkdir usr
+<br>
+cd usr
+<br>
+tar xvf /Volumes/xcas_osx6/xcas.pkg usr.pkg/Payload
+<br>
+tar xvf usr.pkg/Payload
+</tt>
+<br>
+o&ugrave; le chemin vers <tt>xcas.pkg</tt> doit peut-etre
+etre adpat&eacute;.
+</li>
+<li>
+Pour faire une puissance (<tt>^</tt>) sur un clavier avec accents,
+tapez <tt>^</tt> puis espace ou tapez <tt>**</tt>
+</li>
+<li>
+Remarque : Le binaire en ligne de commande
+<tt>icas</tt> est en 64 bits, 
+alors que <tt>xcas</tt> est en 32 bits (donc plus lent pour
+certains gros calculs).
+</li>
+</ul>
+</LI>
+<LI>
+Pour <b>Mac OS X.4 et 5</b>, utilisez ce package
+<A HREF="giac/xcas_osx45.dmg.gz">HTTP</A>. 
+Cliquer sur le package installer
+de l'image disque qui devrait installer xcasfr dans Applications.
+<br>
+<b> Attention, pour les anciens Mac OS X.4/5 (processeurs Power PC)
+si Xcas OS X.3 est install&eacute;</b>, suivre 
+<A HREF="install_macppc_fr.html">ces indications</A>.
+</LI>
+</UL>
+
+<H2> <A NAME=linux> Xcas pour Linux PC </A> </H2>
+
+<H3>Incompatibilit&eacute; avec Unity</H3>
+Des probl&egrave;mes de stabilit&eacute; ou de mauvaise prise en compte des touches
+(par exemple AltGr) ont &eacute;t&eacute; signal&eacute;s si on ex&eacute;cute Xcas sur 
+certaines versions d'Unity 
+(environnement par d&eacute;faut des Ubuntu r&eacute;cents entre autres).
+Si vous avez ce probl&egrave;me,
+la solution consiste &agrave; changer de window manager, par exemple
+Gnome, Xfce, Icewm ne posent pas ce probl&egrave;me.
+
+
+<H3>Note sur la 3-d </H3>
+Xcas utilise les possibilit&eacute;s d'OpenGL pour les graphes
+et la g&eacute;om&eacute;trie dans l'espace, votre carte graphique
+doit donc etre correctement configur&eacute;e par rapport &agrave;
+l'acc&eacute;l&eacute;ration mat&eacute;rielle. Si elle est
+support&eacute;e, le module <tt>dri</tt> doit &eacute;tre
+charg&eacute; dans <tt>/etc/X11/xorg.conf</tt> 
+(ou <tt>/etc/X11/XF86Config-4</tt>). Si par contre <tt>xcas</tt> 
+plante lors d'une commande telle que <tt>plan(z=0)</tt>, veillez
+&agrave; d&eacute;sactiver le chargement du module <tt>dri</tt>
+ou &agrave; installer les drivers ad&eacute;quats pour votre carte
+vid&eacute;o.
+
+<H3><A NAME=packages>  Paquetages Debian/Ubuntu (i386 32/64 bits, ARM) </A> </H3>
+<UL>
+<li>
+Attention, 
+lire la <A HREF="#linux">note</A> ci-dessus.
+</li>
+<li>
+Ajoutez la ligne suivante 
+<br>
+<tt>  deb http://www-fourier.ujf-grenoble.fr/~parisse/debian/ stable
+main</tt>
+<br>
+dans le fichier <tt>/etc/apt/sources.list</tt>
+puis tapez 
+<br>
+<tt>sudo apt-get update</tt>
+<br>
+Pour installer ou mettre &agrave; jour, tapez alors
+<br>
+<tt>sudo apt-get install giac</tt>
+<br>
+Si l'installation &eacute;choue parce que <tt>libgmp3c2</tt> ne peut
+etre install&eacute;, remplacez <tt>main</tt> par <tt>testing</tt>
+dans la ligne ci-dessus de <tt>/etc/apt/sources.list</tt> 
+et recommencez les deux commandes 
+pr&eacute;c&eacute;dentes.
+<br>
+Pour les programmeurs Python (sauf distribution 32 bits stable),
+vous pouvez installer le package python-giacpy de F. Han
+<br>
+<tt>sudo apt-get install giac python-giacpy</tt>
+<br>
+Pour automatiser les mises &agrave; jour et &eacute;viter
+les warnings, vous pouvez une fois pour toutes importer la
+<a href="xcas_public_key.gpg">clef de signature GPG de Xcas</a>,
+pour cela tapez la commande
+<br>
+<tt>sudo apt-key add xcas_public_key.gpg</tt>
+<br>
+depuis le r&eacute;pertoire o&ugrave; vous avez 
+t&eacute;l&eacute;charg&eacute; cette clef.
+Ces manipulations sont malheureusement n&eacute;cessaires 
+parce que Giac/Xcas n'est
+pas int&eacute;gr&eacute; aux distributions officielles
+(Debian, Ubuntu,..., on attend depuis 10 ans maintenant
+pour Debian :-().
+</li>
+<li>
+Si vous souhaitez essayer la version en cours de tests,
+utilisez &agrave; la place la ligne suivante
+<br>
+<tt>  deb http://www-fourier.ujf-grenoble.fr/~parisse/debian/ testing
+main</tt>
+<br>
+</li>
+<li>
+Si ca ne marche pas, installez &agrave; la main le paquet ci-dessous:
+<UL>
+<LI>
+Paquetage Debian tout en un (giac 1.1.3 pour i386)
+<A HREF="giac/giac_1.1.3-16_i386.deb">HTTP</A>
+</LI>
+Paquetage Debian tout en un (giac 1.1.4 pour x64)
+<A HREF="debian/binary-amd64/giac_1.1.4-12_amd64.deb">HTTP</A>
+</LI>
+<!---
+<LI>
+En 5 packages propres pour sarge/etch
+<A HREF="ftp://ftp-fourier.ujf-grenoble.fr/linux/xcas/giac_0.8.6-2_i386.deb">giac</A> ,
+<A HREF="ftp://ftp-fourier.ujf-grenoble.fr/linux/xcas/giac-doc_0.8.6-2_i386.deb">doc</A>,
+<A HREF="ftp://ftp-fourier.ujf-grenoble.fr/linux/xcas/giac-doc-nonfree_0.8.6-2_i386.deb">non free doc</A>,
+<A HREF="ftp://ftp-fourier.ujf-grenoble.fr/linux/xcas/libgiac0_0.8.6-2_i386.deb">lib</A>,
+<A
+HREF="ftp://ftp-fourier.ujf-grenoble.fr/linux/xcas/libgiac0-dev_0.8.6-2_i386.deb">devel</A>.
+</LI>
+--->
+</UL>
+Pour installer, taper
+<br>
+<tt>sudo dpkg -i *giac*.deb</tt>
+</li>
+<li>
+Si <tt>dpkg</tt> renvoie une erreur de packages manquants, regardez le(s) 
+nom(s) indiqu&eacute;(s) et tapez une commande <tt>apt-get</tt> correspondante,
+par exemple
+<br>
+<tt>sudo apt-get install libstdc++5</tt>
+</li>
+<li>
+Si vous avez une erreur due &agrave; libreadline.so.5 manquante, 
+alors installez <tt>sudo apt-get install readline5</tt> ou
+si vous avez install&eacute; libreadline (par exemple version 6)
+tapez les commandes
+<br>
+<tt> cd /usr/lib ; sudo ln -s libreadline.so.6 libreadline.so.5 ; sudo ldconfig </tt>
+</li>
+<li>
+<A HREF="ftp://fisher.ciencias.uniovi.es/debian">
+Carlos Enriqe Carleos Artime</A> a cr&eacute;&eacute; les premiers
+packages debian de giac.
+</li>
+</UL>
+
+<H3> <A NAME=xcasrpm>RPM (OpenSuse, Fedora, Mandriva,...)</A> </H2>
+Attention, 
+lire la <A HREF="#linux">note</A> ci-dessus.
+<ul>
+<li> 64 bits: paquet pour
+<a href="giac/giac-1.1.1-12.x86_64.rpm">Open Suse 12.2</a>.
+(<a href="giac/giac-devel-1.1.0-12.x86_64.rpm">old 1.1.0</a>)
+<br>
+Pour Mageia, voir aussi la page de 
+<A HREF="http://www.math.jussieu.fr/~han/xcas/mageia">Frederic Han</A> 
+</li>
+<li> 32 bits: paquet pour
+<a href="giac/giac-1.1.1-12.i386.rpm">Open Suse 12.2</a>.
+(<a href="giac/giac-devel-1.1.0-12.i386.rpm">old 1.1.0</a>)
+</li>
+</ul>
+Il peut etre necessaire d'installer des paquets complementaires:
+par exemple sur Fedora 17 <tt>sudo yum install gsl libpng-compat</tt>
+avant de faire la commande <tt>sudo rpm -U giac*rpm</tt> depuis
+le repertoire ou vous avez telecharge les RPM.
+
+<H3> <A NAME=xcasarch> Xcas pour archlinux</> </H3>
+<a href="https://aur.archlinux.org/packages/xcas-bin/">Paquets binaires</a>
+compil&eacute;s par Laurent Hofer.
+
+<H3> <A NAME=xcaslinuxarm> Xcas pour Linux ARM </A> </H3>
+La version 1.1 est disponible pour smartbooks avec distribution
+compatible Ubuntu ARM 10.10 (armel, par exemple Hercules ecafe
+linux ou efika mx smartbook) ou 12.04 (armhf, par exemple
+Chromebook arm avec Ubuntu/Crouton):
+suivre la m&eacute;me proc&eacute;dure que
+pour des packages debian Intel.
+
+
+<H3> <A NAME=xcaslinux> Binaires PC toutes distributions </A> </H3>
+<ul>
+<li>
+Version 1.0 i386: <a href="giac/xcas.tgz">ici</a>. Desarchivez
+par exemple dans <tt>/usr/local</tt>.
+Variables d'environement &agrave; positionner
+<ul>
+<li> <tt>export LD_LIBRARY_PATH=/usr/local/lib</tt> (remplacer
+<tt>/usr/local</tt> par le repertoire de desarchivage,
+peut etre omis si <tt>/usr/local/lib</tt> se trouve
+dans <tt>/etc/ld.so.conf</tt>)
+</li>
+<li>
+<tt> export XCAS_HELP=/usr/local/share/giac</tt> (remplacer <tt>/usr/local</tt>)
+</li>
+<li>
+<tt> export XCAS_ROOT=/usr/local/bin</tt> (remplacer <tt>/usr/local</tt>)
+</li>
+</ul>
+</li>
+<li> Voir la page de 
+<A HREF="http://www.math.jussieu.fr/~han/xcas/">Frederic Han</A> 
+pour d'autres versions r&eacute;centes.
+</li>
+<li>
+Ancienne version 0.8.6.
+Attention, 
+lire la <A HREF="#linux">note</A> ci-dessus.
+<UL>
+<LI> Installation par l'administrateur syst&egrave;me
+<A HREF="giac/xcas_root.tgz">HTTP</A>. 
+Commencez par &eacute;diter le fichier <tt>/etc/ld.so.conf</tt> et mettez-y
+les 2 lignes <tt>/usr/lib</tt> et <tt>/usr/local/lib</tt> dans cet
+ordre. Puis
+<br>
+<tt>cd / ; tar xvfz ~/xcas_root.tgz ; ldconfig </tt><br> 
+Si le lien ci-dessus
+ne fonctionne pas, une autre version (mise &agrave; jour de temps
+en temps) se trouve 
+<A HREF="http://perso.wanadoo.fr/bernard.parisse/stable/xcas_root.tgz">ici</A>.
+<br>
+Le programme se lance alors en tapant 
+<br> <tt>  xcas &</tt> </br>
+</LI>
+<!-- 
+<LI> Installation dans le 
+<A HREF="ftp://ftp-fourier.ujf-grenoble.fr/linux/xcas/xcas_user.tgz">
+r&eacute;pertoire courant
+</A>. Lancer la commande <br>
+<tt>tar xvfz xcas_user.tgz</tt><br>
+Modifiez le shell-script <tt>~/xcas/xcas</tt> pour que les chemins
+correspondent &agrave; votre installation.
+Le programme se lance en tapant<br>
+<tt>cd ~/xcas ; ./xcas &</tt> <br>
+Si l'aide HTML n'est pas accessible, tapez la commande<br>
+<tt>rm xcas/doc/fr/html_*</tt><br>
+puis relancez xcas.
+</LI>
+<LI> <b>Executables 64 bits</b><br>
+D&eacute;sarchivez 
+<A HREF="ftp://ftp-fourier.ujf-grenoble.fr/linux/xcas/xcas64.tgz">xcas64.tgz</A> 
+dans le r&eacute;pertoire
+o&ugrave; se trouvent <tt>xcas</tt> et <tt>icas</tt>, par
+exemple <tt>/usr/bin</tt> (si vous avez utilis&eacute;
+un package) ou <tt>/usr/local/bin</tt> (avec xcas_root).
+</LI>
+-->
+</UL>
+</li>
+</ul>
+
+<H2> <A NAME=android>Giac sur smartphone et tablette Android</A> </H2>
+<ul>
+<li>
+Une interface en version alpha pour utiliser
+le moteur de calcul formel giac sur Android, par Thomas Luka.
+C'est une application libre, utilisant necessitas, qu'il faut installer &agrave;
+la main (elle n'est pas encore suffisamment mure pour
+etre sur Google Play), t&eacute;l&eacute;chargez
+<a href="giac/Androcas-debug.apk">ce fichier</a> sur votre
+smartphone ou tablette, puis avec un gestionnaire de fichiers
+(si vous n'en avez pas il en existe des gratuits comme par
+exemple Androzip), renommez le fichier avec l'extension
+<tt>.apk</tt> (le navigateur change en effet cette extension lors
+du t&eacute;l&eacute;chargement) et ex&eacute;cutez-le. Ou si
+vous avez le kit de d&eacute;veloppement pour Android, connectez
+votre engin et tapez
+la commande <tt>adb install Androcas-debug.apk</tt>.
+</li>
+<li>
+il existe aussi une application gratuite pour tablette
+(ne fonctionne pas sur certains smartphones)
+sur google play 
+<a href="https://play.google.com/store/apps/details?id=org.kde.necessitas.mucephi.android_xcas">Xcas Pad</a>,  
+utilisant giac comme noyau de
+calcul, dont l'auteur est Leonel Hernandez.
+</li>
+<li>
+Une application gratuite pour isoler les racines r&eacute;elles d'un
+polynome &agrave; coefficients r&eacute;els 
+<a href="https://play.google.com/store/apps/details?id=org.kde.necessitas.berkakis.realroots">ici</a>. Ecrite par Antonis Berkakis sous la direction de 
+ Alkiviadis G. Akritas et financ&eacute;e par l'Universit&eacute; de Thessaly, Gr&egrave;ce.
+</li>
+</ul>
+
+<H2> <A NAME=xcaswince> Xcas pour Windows CE </H2>
+Daniel Alm propose une interface gratuite (mais non libre)
+pour Windows CE bas&eacute;e sur
+Giac. Voir son 
+<A HREF="http://pocketcas.com/">site</A> ou cliquez
+sur ce <A HREF="http://pocketcas.com/?download=xcas.zip">lien direct</A>
+si vous voulez seulement telecharger le binaire sans l'interface.
+
+<H2> <A NAME=ti>Khicas: Giac pour TI Nspire</A> </H2>
+Une 
+<a href="calc/khicas.zip">version exp&eacute;rimentale</a>
+de khicas tourne sur les
+calculatrices TI Nspire CX (CAS ou non CAS) 
+avec Ndless install&eacute;
+(voir les tutoriels d'installation pour
+<a href="http://tiplanet.org/forum/viewtopic.php?t=14086">OS 3.6</a>,
+<a href="http://tiplanet.org/forum/viewtopic.php?f=57&t=16073">3.9</a>). 
+Pour les nspire noir et blanc, utilisez <a href="khicasbw.zip">la
+version non CX</a>.
+<br>
+C'est la seule facon l&eacute;gale d'utiliser un moteur de calcul
+formel complet sur les TI Nspire non CAS. Attention, toutefois, vous
+ne devez pas utiliser khicas pendant un examen/concours 
+interdisant les calculatrices CAS (ce serait consid&eacute;r&eacute; comme
+de la fraude, au meme titre que des anti-s&egrave;ches...).
+Sur les TI nspire CAS ou CX CAS 
+cela fournit un autre moteur de calcul formel (avec des
+fonctionnalit&eacute;s math&eacute;matiques plus avanc&eacute;es).
+<br>
+<b>Attention</b>, Ndless et donc Khicas ne fonctionnent qu'avec
+les OS jusqu'a la version 3.6/3.9 <b>ne mettez pas votre
+calculatrice a jour vers une version ult&eacute;rieure</b>.
+<br>
+Pour les d&eacute;veloppeurs int&eacute;ress&eacute;s,
+il faut installer la nouvelle toolchain newlib du ndless-sdk
+et compiler GMP/MPFR/MPFI. Pour la version noir et blanc,
+il faut installer le SDK ndless, le 
+<a href="calc/giac.tgz">code source</a>,
+ou/et des changements de headers/libs
+dans votre r&eacute;pertoire <tt>.ndless</tt> 
+<a href="calc/ndless.tar.bz2"> archive .ndless</a>
+(versions modifi&eacute;es de
+<a href="calc/nspire-io.tar.bz2">nspire-io</a>,
+<a href="calc/ustl.tar.bz2">USTL</a>, 
+<a href="calc/libtommath.tar.bz2">tommath</a>).
+<br>
+Remerciements &agrave; Xavier Andr&eacute;ani et Adrien Bertrand pour
+l'interface LUA, &agrave; Vogtinator, Excale, Extended pour l'aide
+apport&eacute;e pour compiler.
+
+
+<H2> <A NAME=giaciphone>Giac sur iPhone/iPad</A> </H2>
+Une version <a href="https://github.com/xcaspad/ios_xcaspad">gratuite</a> exp&eacute;rimentale pour iOS, par Leonel Hernandez.
+<br>
+Une version non libre de Giac (dual license commerciale) est
+incluse dans les applications suivantes
+<ul>
+<li>
+<A HREF="http://pocketcas.com/">PocketCAS</A> pour iPhone/iPad
+par Daniel Alm
+</li>
+<li>
+<a href="http://itunes.apple.com/app/cas-calc-p11/id453071113?mt=8">
+CAS Calc P11</A> pour iPad par Power APP Gmbh
+</li>
+<li>
+Il existe aussi une <b>application gratuite</b>
+pour l'isolation des racines r&eacute;elles
+de polynome 
+<A HREF="http://itunes.apple.com/gr/app/realroots/id483609988?mt=8">ici</A>.
+Par Spyros Kehagias supervis&eacute; par Alkiviadis G. Akritas 
+de l'University of Thessaly, Greece.
+</li>
+</ul>
+
+</body>
+</html>
+

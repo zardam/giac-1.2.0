@@ -1,0 +1,2 @@
+#! /bin/bash
+tar cvfz nspiregiac.tgz *.cc *.h *.yy *.ll Makefile *.elf *.tns archive

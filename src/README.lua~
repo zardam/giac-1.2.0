@@ -1,0 +1,38 @@
+giac lua module for TI nspire calculator family, OS version 3.1/3.6
+(c) 2014 B. Parisse and R. De Graeve, GPL 3 license (see COPYING file)
+test_giac by Adriweb.
+khicas (OS 3.6) UI based on SuperSpire from Xavier "critor" Andréani's ,
+modified by Jim Bauwens and Adrien "Adriweb" Bertrand
+You must install ndless to run giac, see tiplanet.org/forum/ndl3ss.php
+Then send luagiac.luax.tns and test_giac.tns (OS 3.1) or khicas (OS 3.6) 
+to your calculator. 
+Then from Home, My Documents, select test_giac or khicas and press Enter.
+You can run almost all Xcas commands from here, for example
+a:=partfrac(1/(x^4-1))
+normal(a)
+factor(a)
+ifactor(2^128+1)
+
+Important note: if the giac module fails to load, make sure
+ndless is active, run ndless_installer if it is not and try again.
+
+==========================
+
+Module giac lua pour calculatrices TI nspire, OS version 3.1/3.6
+(c) 2014 B. Parisse and R. De Graeve, GPL 3 license (cf. fichier COPYING)
+test_giac (OS 3.1) UI par Adriweb
+khicas (OS 3.6) UI base sur SuperSpire de Xavier "critor" Andréani's ,
+modifie par Jim Bauwens et Adrien "Adriweb" Bertrand
+Vous devez installer ndless pour utiliser giac, voir le tutoriel sur
+ tiplanet.org/forum/ndl3ss.php
+Ensuite telecharger luagiac.luax.tns et test_giac.tns (OS 3.1)
+ou khicas.tns (OS 3.6) sur votre calculatrice 
+Ensuite Home, Mes Documents selectionnez test_giac.tns ou khicas.tns
+et pressez Enter.
+On peut taper presque toutes les commandes Xcas, par example
+f(x):=1/(x^2+2x-3)
+factor(f'(x))
+ifactor(2^128+1)
+
+Note importante: si le module giac ne se charge pas, verifier
+que ndless est active, si ce n'est pas le cas relancez ndless_installer
