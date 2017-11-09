@@ -107,7 +107,7 @@
 /* #undef HAVE_GMPXX_H */
 
 /* Define to 1 if you have the <gmp.h> header file. */
-#define HAVE_GMP_H 1
+//#define HAVE_GMP_H 1
 
 /* Define to 1 if you have the <gsl/gsl_blas.h> header file. */
 /* #undef HAVE_GSL_GSL_BLAS_H */
@@ -171,7 +171,7 @@
 /* #undef HAVE_LIBGL */
 
 /* Define to 1 if you have the `gmp' library (-lgmp). */
-#define HAVE_LIBGMP 1
+//#define HAVE_LIBGMP 1
 
 /* Define to 1 if you have the `gmpxx' library (-lgmpxx). */
 /* #undef HAVE_LIBGMPXX */
@@ -198,10 +198,10 @@
 #define HAVE_LIBM 1
 
 /* Define to 1 if you have the `mpfi' library (-lmpfi). */
-#define HAVE_LIBMPFI 1
+//#define HAVE_LIBMPFI 1
 
 /* Define to 1 if you have the `mpfr' library (-lmpfr). */
-#define HAVE_LIBMPFR 1
+//#define HAVE_LIBMPFR 1
 
 /* Define to 1 if you have the `ntl' library (-lntl). */
 /* #undef HAVE_LIBNTL */
@@ -382,7 +382,7 @@
 #define HAVE_SYS_PARAM_H 1
 
 /* Define to 1 if you have the <sys/resource.h> header file. */
-#define HAVE_SYS_RESOURCE_H 1
+//#define HAVE_SYS_RESOURCE_H 1
 
 /* Define to 1 if you have the <sys/stat.h> header file. */
 #define HAVE_SYS_STAT_H 1
@@ -497,7 +497,7 @@
 #define UNORDERED_MAP 1
 
 /* Replace GMP by tommath */
-/* #undef USE_GMP_REPLACEMENTS */
+#define USE_GMP_REPLACEMENTS 1
 
 /* Defined if fltk has OpenGL enabled */
 /* #undef USE_OPENGL32 */

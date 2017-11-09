@@ -1,11 +1,11 @@
-GCC = nspire-gcc
-CXX = nspire-g++
-LD = nspire-ld 
-#GCCFLAGS = -g -marm -I/Users/parisse/Ndless/ndless-sdk/toolchain/install/include -fno-strict-aliasing -DHAVE_CONFIG_H -I. -I..  -DIN_GIAC -DTIMEOUT -DNSPIRE_NEWLIB -DNO_PHYSICAL_CONSTANTS -DNO_STDEXCEPT -DSTATIC_BUILTIN_LEXER_FUNCTIONS -DGIAC_BINARY_ARCHIVE -DNO_UNARY_FUNCTION_COMPOSE -DTIMEOUT -fno-exceptions # -DGIAC_GENERIC_CONSTANTS -ffunction-sections -fdata-sections
-GCCFLAGS = -g -marm -I/Users/parisse/Ndless/ndless-sdk/toolchain/install/include -Os -fno-strict-aliasing -DHAVE_CONFIG_H -I. -I..  -DIN_GIAC -DTIMEOUT -DNSPIRE_NEWLIB -DNO_PHYSICAL_CONSTANTS -DNO_STDEXCEPT -DSTATIC_BUILTIN_LEXER_FUNCTIONS -DGIAC_BINARY_ARCHIVE -DNO_UNARY_FUNCTION_COMPOSE -DTIMEOUT -fno-exceptions # -DGIAC_GENERIC_CONSTANTS -ffunction-sections -fdata-sections
-LDFLAGS = -g -Wl,--nspireio,--gc-sections -L/Users/parisse/Ndless/ndless-sdk/toolchain/install/lib -lmpfi -lmpfr -lgmp
-#GCCFLAGS =  -marm -I~/Ndless/ndless-sdk/include -Os -fno-strict-aliasing -DGIAC_GENERIC_CONSTANTS -DHAVE_CONFIG_H -I. -I..  -DIN_GIAC -DNO_PHYSICAL_CONSTANTS -DHAVE_CONFIG_H -DNO_STDEXCEPT -DSTATIC_BUILTIN_LEXER_FUNCTIONS -DGIAC_BINARY_ARCHIVE -DNO_UNARY_FUNCTION_COMPOSE -DTIMEOUT -DNO_TEMPLATE_MULTGCD -DUSE_GMP_REPLACEMENTS -DNSPIRE_NEWLIB
-#LDFLAGS = -Wl,--nspireio,--gc-sections -ltommath
+#PREFIX = arm-none-eabi-
+GCC = $(PREFIX)gcc
+CXX = $(PREFIX)g++
+LD = $(PREFIX)ld
+
+GCCFLAGS = -I. -I../../libtommath-0.39 -g -O0 -fpermissive -Wno-narrowing -fno-exceptions -fno-strict-aliasing -DHAVE_CONFIG_H -DIN_GIAC -DTIMEOUT -DNO_PHYSICAL_CONSTANTS -DNO_STDEXCEPT -DSTATIC_BUILTIN_LEXER_FUNCTIONS -DGIAC_BINARY_ARCHIVE -DNO_UNARY_FUNCTION_COMPOSE -DTIMEOUT -DNUMWORKS
+#GCCFLAGS += -fno-threadsafe-statics -mthumb -march=armv7e-m -mfloat-abi=hard -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -fdata-sections -ffunction-sections
+
 GENZEHN = genzehn
 
 EXE = luagiac.luax.tns
@@ -14,7 +14,7 @@ OBJS = sym2poly.o gausspol.o threaded.o maple.o ti89.o mathml.o moyal.o misc.o p
 DISTDIR = .
 vpath %.tns $(DISTDIR)
 
-all: $(EXE) khicas.tns giac.tns khicas.zip
+all: libgiac.a
 
 .cc.o:
 	$(CXX) $(GCCFLAGS) -c $<
@@ -48,8 +48,8 @@ giac.tns:	$(OBJS) giacnspire.o #missing.o
 	genzehn --info --input giac.tns
 
 libgiac.a:   $(OBJS) 
-	arm-none-eabi-ar rcs libgiac.a $(OBJS) 
-	arm-none-eabi-ranlib libgiac.a
+	$(PREFIX)ar rcs libgiac.a $(OBJS)
+	$(PREFIX)ranlib libgiac.a
 
 khicas.zip: luagiac.luax.tns khicas.tns 
 	zip khicas.zip luagiac.luax.tns khicas.tns khicas.lua README.lua COPYING WARNING

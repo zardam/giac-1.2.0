@@ -44,7 +44,7 @@ using namespace std;
 #include <sys/param.h>
 #endif
 
-#if !defined BESTA_OS && !defined NSPIRE // test should always return true
+#if !defined BESTA_OS && !defined NSPIRE && !defined NUMWORKS // test should always return true
 #include <dirent.h>
 #endif
 
@@ -905,7 +905,7 @@ namespace giac {
     return 0;
   }
 
-#if ! (defined VISUALC || defined BESTA_OS || defined NSPIRE || defined NSPIRE_NEWLIB)
+#if ! (defined VISUALC || defined BESTA_OS || defined NSPIRE || defined NSPIRE_NEWLIB || NUMWORKS)
 #ifdef WIN32
   static int dir_select (const struct dirent *d){
     string s(d->d_name);
@@ -951,7 +951,7 @@ namespace giac {
 #endif // visualc
 
   void find_all_index(const std::string & subdir,multimap<std::string,std::string> & mtt,multimap<std::string,std::string> & mall){
-#if defined GNUWINCE || defined __MINGW_H || defined __ANDROID__ || defined EMCC || defined NSPIRE_NEWLIB
+#if defined GNUWINCE || defined __MINGW_H || defined __ANDROID__ || defined EMCC || defined NSPIRE_NEWLIB || defined NUMWORKS
     return;
 #else
     // cerr << "HTML help Scanning " << subdir << endl;

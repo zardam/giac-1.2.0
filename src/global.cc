@@ -1636,7 +1636,7 @@ extern "C" void Sleep(unsigned int miliSecond);
 #else
   int debug_infolevel=0;
 #endif
-#if defined __APPLE__ || defined VISUALC || defined __MINGW_H || defined BESTA_OS || defined NSPIRE || defined NSPIRE_NEWLIB
+#if defined __APPLE__ || defined VISUALC || defined __MINGW_H || defined BESTA_OS || defined NSPIRE || defined NSPIRE_NEWLIB || NUMWORKS
   int threads=1;
 #else
   int threads=sysconf (_SC_NPROCESSORS_ONLN);
