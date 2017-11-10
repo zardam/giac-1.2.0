@@ -1,10 +1,10 @@
-#PREFIX = arm-none-eabi-
+PREFIX = arm-none-eabi-
 GCC = $(PREFIX)gcc
 CXX = $(PREFIX)g++
 LD = $(PREFIX)ld
 
 GCCFLAGS = -I. -I../../libtommath-0.39 -g -O0 -fpermissive -Wno-narrowing -fno-exceptions -fno-strict-aliasing -DHAVE_CONFIG_H -DIN_GIAC -DTIMEOUT -DNO_PHYSICAL_CONSTANTS -DNO_STDEXCEPT -DSTATIC_BUILTIN_LEXER_FUNCTIONS -DGIAC_BINARY_ARCHIVE -DNO_UNARY_FUNCTION_COMPOSE -DTIMEOUT -DNUMWORKS
-#GCCFLAGS += -fno-threadsafe-statics -mthumb -march=armv7e-m -mfloat-abi=hard -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -fdata-sections -ffunction-sections
+GCCFLAGS += -fno-threadsafe-statics -mthumb -march=armv7e-m -mfloat-abi=hard -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -fdata-sections -ffunction-sections
 
 GENZEHN = genzehn
 
