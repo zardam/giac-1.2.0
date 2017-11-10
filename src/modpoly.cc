@@ -5475,16 +5475,12 @@ namespace giac {
 	  gen dx(x[j]-x[j-k]);
 	  if (divexact && g.type==_ZINT && g.ref_count()==1 && dx.type==_INT_){
 	    mpz_t * z=g._ZINTptr;
-#ifdef USE_GMP_REPLACEMENTS
-	    mp_div(z, dx._ZINTptr, z, NULL);
-#else
 	    if (dx.val>0)
 	      mpz_divexact_ui(*z,*z,dx.val);
 	    else {
 	      mpz_divexact_ui(*z,*z,-dx.val);
 	      mpz_neg(*z,*z);
 	    }
-#endif
 	  }
 	  else
 	    g=g/dx;
